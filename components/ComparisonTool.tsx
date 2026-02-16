@@ -6,7 +6,7 @@ import FeatureDetailsModal from './FeatureDetailsModal';
 import { useData } from '../context/DataContext';
 
 const ComparisonTool: React.FC = () => {
-  const { features, plans } = useData();
+  const { features, plans, billingFrequency } = useData();
   const [selectedPlanIds, setSelectedPlanIds] = useState<string[]>([
     plans[2]?.id || '', // BP
     plans[3]?.id || '', // E3
@@ -50,7 +50,11 @@ const ComparisonTool: React.FC = () => {
 
   const exportToCSV = () => {
     // Generate headers
-    const headers = ["Category", "Feature", "Description", ...selectedPlans.map(p => `${p.name} (${p.price}/${p.priceINR})`)];
+    const headers = ["Category", "Feature", "Description", ...selectedPlans.map(p => {
+      const price = billingFrequency === 'monthly' ? p.price : p.priceAnnual;
+      const inr = billingFrequency === 'monthly' ? p.priceINR : p.priceAnnualINR;
+      return `${p.name} (${price}/${inr})`;
+    })];
     
     const rows: string[][] = [];
     categories.forEach(cat => {
@@ -87,7 +91,7 @@ const ComparisonTool: React.FC = () => {
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", `m365_comparison_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `m365_comparison_${billingFrequency}_${new Date().toISOString().split('T')[0]}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -109,7 +113,7 @@ const ComparisonTool: React.FC = () => {
           <div className="space-y-3">
             <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
               <i className="fas fa-layer-group text-blue-500"></i>
-              Configure Matrix
+              Configure Matrix ({billingFrequency})
             </h3>
             <div className="flex flex-wrap gap-2">
               {plans.map(p => {
@@ -136,15 +140,15 @@ const ComparisonTool: React.FC = () => {
               onClick={exportToCSV}
               className="px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-2 shadow-sm"
             >
-              <i className="fas fa-file-csv"></i>
+              <i className="fas fa-file-csv text-green-600"></i>
               CSV Export
             </button>
             <button 
               onClick={() => window.print()}
               className="px-6 py-3 bg-slate-900 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white hover:bg-slate-800 transition-all flex items-center gap-2 shadow-lg shadow-slate-200"
             >
-              <i className="fas fa-file-export"></i>
-              Export View
+              <i className="fas fa-file-pdf text-red-400"></i>
+              Export PDF
             </button>
           </div>
         </div>
@@ -158,17 +162,21 @@ const ComparisonTool: React.FC = () => {
               <div className="p-6 bg-slate-900 text-[10px] font-black uppercase tracking-widest text-slate-400 border-r border-slate-800 sticky left-0 z-30">
                 Service & Capability Map
               </div>
-              {selectedPlans.map(plan => (
-                <div key={plan.id} className="p-6 bg-slate-900 text-[10px] font-black uppercase tracking-widest text-white text-center border-r border-slate-800 last:border-r-0 sticky top-0 z-20">
-                  <div className="flex flex-col gap-1">
-                    <span className="truncate">{plan.name}</span>
-                    <div className="flex flex-col opacity-80">
-                      <span className="text-blue-400">{plan.price}</span>
-                      <span className="text-[8px] text-slate-400">{plan.priceINR}</span>
+              {selectedPlans.map(plan => {
+                const price = billingFrequency === 'monthly' ? plan.price : plan.priceAnnual;
+                const inr = billingFrequency === 'monthly' ? plan.priceINR : plan.priceAnnualINR;
+                return (
+                  <div key={plan.id} className="p-6 bg-slate-900 text-[10px] font-black uppercase tracking-widest text-white text-center border-r border-slate-800 last:border-r-0 sticky top-0 z-20">
+                    <div className="flex flex-col gap-1">
+                      <span className="truncate">{plan.name}</span>
+                      <div className="flex flex-col opacity-80">
+                        <span className="text-blue-400">{price}</span>
+                        <span className="text-[8px] text-slate-400">{inr}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="contents divide-y divide-slate-100">

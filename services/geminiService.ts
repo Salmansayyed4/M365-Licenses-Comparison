@@ -1,7 +1,7 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// Fix: Use process.env.API_KEY directly as per guidelines
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const askLicensingAI = async (prompt: string, context?: string) => {
   try {
@@ -19,6 +19,7 @@ export const askLicensingAI = async (prompt: string, context?: string) => {
       },
     });
 
+    // Fix: Access .text as a property as per guidelines (not a method)
     return response.text || "I'm sorry, I couldn't process that request.";
   } catch (error) {
     console.error("Gemini API Error:", error);

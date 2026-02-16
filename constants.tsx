@@ -197,7 +197,9 @@ export const PLANS: Plan[] = [
     name: 'M365 Business Basic',
     type: 'Business',
     price: '$6.00',
-    priceINR: '₹500',
+    priceINR: '₹174',
+    priceAnnual: '$72.00',
+    priceAnnualINR: '₹1,740',
     color: '#00a1f1',
     description: 'Cloud services only. Email, web/mobile versions of apps.',
     features: ['p1', 'p2', 'p3', 'p4', 'p5', 'v1', 'v2', 'v3', 'm3', 'm4']
@@ -207,7 +209,9 @@ export const PLANS: Plan[] = [
     name: 'M365 Business Standard',
     type: 'Business',
     price: '$12.50',
-    priceINR: '₹1,045',
+    priceINR: '₹925',
+    priceAnnual: '$150.00',
+    priceAnnualINR: '₹9,240',
     color: '#7fba00',
     description: 'Business apps (Desktop) plus Basic features.',
     features: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p9', 'v1', 'v2', 'v3', 'm3', 'm4', 'c2']
@@ -217,7 +221,9 @@ export const PLANS: Plan[] = [
     name: 'M365 Business Premium',
     type: 'Business',
     price: '$22.00',
-    priceINR: '₹1,840',
+    priceINR: '₹2,175',
+    priceAnnual: '$264.00',
+    priceAnnualINR: '₹21,780',
     color: '#0078d4',
     description: 'Advanced security for SMBs. Includes Intune, Defender, and Information Protection.',
     features: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p9', 'p10', 'v1', 'v2', 'v3', 's1', 's3', 's4', 's6', 's7', 's8', 'c1', 'c2', 'c7', 'c8', 'm2', 'm3', 'm4']
@@ -227,7 +233,9 @@ export const PLANS: Plan[] = [
     name: 'Microsoft 365 E3',
     type: 'Enterprise',
     price: '$36.00',
-    priceINR: '₹3,000',
+    priceINR: '₹3,130',
+    priceAnnual: '$432.00',
+    priceAnnualINR: '₹31,320',
     color: '#005a9e',
     description: 'Enterprise productivity with standard security and compliance.',
     features: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p9', 'p10', 'v1', 'v2', 'v3', 's3', 's4', 's6', 's7', 'c1', 'c2', 'c3', 'c5', 'm1', 'm2', 'm3', 'm4', 'w1']
@@ -237,7 +245,9 @@ export const PLANS: Plan[] = [
     name: 'Microsoft 365 E5',
     type: 'Enterprise',
     price: '$57.00',
-    priceINR: '₹4,760',
+    priceINR: '₹5,350',
+    priceAnnual: '$684.00',
+    priceAnnualINR: '₹53,520',
     color: '#002050',
     description: 'The full suite. Advanced security, compliance, and voice.',
     features: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p9', 'p10', 'v1', 'v2', 'v3', 'v4', 'v5', 's1', 's3', 's4', 's6', 's7', 's9', 's10', 'c1', 'c2', 'c3', 'c4', 'c6', 'c7', 'c8', 'm1', 'm2', 'm3', 'm4', 'w2']
@@ -248,6 +258,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$12.00',
     priceINR: '₹1,000',
+    priceAnnual: '$144.00',
+    priceAnnualINR: '₹12,000',
     color: '#d13438',
     description: 'Advanced security bundle for E3 customers. Includes P2 versions of security tools.',
     features: ['s1', 's3', 's4', 's9', 's10']
@@ -258,6 +270,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$12.00',
     priceINR: '₹1,000',
+    priceAnnual: '$144.00',
+    priceAnnualINR: '₹12,000',
     color: '#8e44ad',
     description: 'Advanced compliance bundle for E3 customers. Automated labeling, advanced eDiscovery.',
     features: ['c1', 'c2', 'c3', 'c4', 'c6', 'c7', 'c8']
@@ -268,6 +282,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$7.00',
     priceINR: '₹585',
+    priceAnnual: '$84.00',
+    priceAnnualINR: '₹7,020',
     color: '#6264a7',
     description: 'AI-powered meetings, advanced protection, and branding.',
     features: ['tp1', 'tp2', 'tp3', 'tp4']
@@ -278,6 +294,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$12.00',
     priceINR: '₹1,000',
+    priceAnnual: '$144.00',
+    priceAnnualINR: '₹12,000',
     color: '#ffb900',
     description: 'Full employee experience platform including Insights, Goals, and Learning.',
     features: ['viva1', 'viva2', 'viva3', 'viva4']
@@ -288,6 +306,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$8.00',
     priceINR: '₹670',
+    priceAnnual: '$96.00',
+    priceAnnualINR: '₹8,040',
     color: '#464775',
     description: 'Cloud PBX capabilities for Microsoft Teams.',
     features: ['v4', 'v5']
@@ -298,6 +318,8 @@ export const PLANS: Plan[] = [
     type: 'Add-on',
     price: '$28.00',
     priceINR: '₹2,340',
+    priceAnnual: '$336.00',
+    priceAnnualINR: '₹28,080',
     color: '#004e8c',
     description: 'Windows desktop in the cloud, accessible from any device.',
     features: ['cloudpc1', 'cloudpc2']
@@ -307,7 +329,9 @@ export const PLANS: Plan[] = [
     name: 'Microsoft 365 F1',
     type: 'Frontline',
     price: '$2.25',
-    priceINR: '₹190',
+    priceINR: '₹185',
+    priceAnnual: '$27.00',
+    priceAnnualINR: '₹2,220',
     color: '#4b5320',
     description: 'Frontline baseline. Teams and security features.',
     features: ['v1', 's4', 's6', 's7']
@@ -317,7 +341,9 @@ export const PLANS: Plan[] = [
     name: 'Microsoft 365 F3',
     type: 'Frontline',
     price: '$8.00',
-    priceINR: '₹670',
+    priceINR: '₹660',
+    priceAnnual: '$96.00',
+    priceAnnualINR: '₹7,920',
     color: '#107c10',
     description: 'Mobile/web access for frontline workers with productivity tools.',
     features: ['p1', 'p2', 'p3', 'p4', 'v1', 'v2', 'v3', 's4', 's6', 's7', 'c1', 'm2', 'm3', 'm4']

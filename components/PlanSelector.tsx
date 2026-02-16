@@ -9,12 +9,15 @@ interface PlanSelectorProps {
 }
 
 const PlanSelector: React.FC<PlanSelectorProps> = ({ selectedPlanIds, onToggle }) => {
-  const { plans } = useData();
+  const { plans, billingFrequency } = useData();
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-3 mb-8">
       {plans.map((plan) => {
         const isSelected = selectedPlanIds.includes(plan.id);
+        const priceDisplay = billingFrequency === 'monthly' ? plan.price : plan.priceAnnual;
+        const inrDisplay = billingFrequency === 'monthly' ? plan.priceINR : plan.priceAnnualINR;
+
         return (
           <button
             key={plan.id}
@@ -32,10 +35,10 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({ selectedPlanIds, onToggle }
             <span className="leading-tight uppercase tracking-tighter line-clamp-2">{plan.name}</span>
             <div className="flex flex-col gap-0.5">
               <span className={`text-[9px] font-bold opacity-70 ${isSelected ? 'text-blue-100' : 'text-slate-400'}`}>
-                {plan.price}
+                {priceDisplay}
               </span>
               <span className={`text-[8px] font-black ${isSelected ? 'text-blue-200' : 'text-blue-600/60'}`}>
-                {plan.priceINR}
+                {inrDisplay}
               </span>
             </div>
             {plan.type === 'Add-on' && (
