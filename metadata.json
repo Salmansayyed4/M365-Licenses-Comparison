@@ -1,0 +1,5 @@
+{
+  "name": "SaaSMap - Microsoft 365 Licensing Navigator",
+  "description": "A visual mapping and comparison tool for Microsoft 365 licensing plans, featuring an AI-powered assistant to help navigate complex feature sets and compliance requirements.",
+  "requestFramePermissions": []
+}
