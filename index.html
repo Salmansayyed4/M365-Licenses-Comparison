@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
       // Shim process.env for browser compatibility
-      window.process = window.process || { env: {} };
+      // Ensure API_KEY is at least an empty string to satisfy SDK constructors
+      window.process = window.process || { env: { API_KEY: "" } };
     </script>
     <style>
         body {
@@ -35,25 +36,8 @@
             header, footer, nav, .no-print, #ai-consultant-root, button, select {
                 display: none !important;
             }
-            body {
-                background-color: white !important;
-            }
-            .print-container {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            .shadow-md, .shadow-sm {
-                shadow: none !important;
-                border: 1px solid #e2e8f0 !important;
-            }
-            .bg-slate-50 {
-                background-color: #f8fafc !important;
-                -webkit-print-color-adjust: exact;
-            }
-            .bg-blue-50, .bg-red-50, .bg-purple-50, .bg-green-50, .bg-indigo-50, .bg-slate-50 {
-                -webkit-print-color-adjust: exact;
-            }
+            body { background-color: white !important; }
+            .print-container { width: 100% !important; margin: 0 !important; padding: 0 !important; }
         }
     </style>
 <script type="importmap">
@@ -71,7 +55,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- Entry point for the React application -->
     <script type="module" src="index.tsx"></script>
 </body>
 </html>
