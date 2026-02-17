@@ -1,8 +1,10 @@
+
 import { createClient } from '@supabase/supabase-js';
 
-// Fallback to placeholders to prevent 'supabaseUrl is required' error during initialization
-// in environments where environment variables are not yet configured.
-const supabaseUrl = process.env.SUPABASE_URL || 'https://placeholder-url.supabase.co';
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || 'placeholder-key';
+// Accessing process.env via the window shim provided in index.html
+const env = (window as any).process?.env || {};
+
+const supabaseUrl = env.SUPABASE_URL || 'https://placeholder-url.supabase.co';
+const supabaseAnonKey = env.SUPABASE_ANON_KEY || 'placeholder-key';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

@@ -72,10 +72,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return saved ? JSON.parse(saved) : null;
   });
 
+  const getEnv = () => (window as any).process?.env || {};
+
   // Fetch initial data from Supabase
   const fetchData = async () => {
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) {
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) {
         console.info("Supabase not configured. Using local data context.");
         return;
       }
@@ -183,7 +186,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setFeatures(prev => prev.map(f => f.id === updated.id ? updated : f));
     
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
 
       await supabase.from('features').upsert({
         id: updated.id,
@@ -228,7 +232,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const deleteFeature = async (id: string) => {
     setFeatures(prev => prev.filter(f => f.id !== id));
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
       await supabase.from('features').delete().eq('id', id);
     } catch (e) {
       console.error("Supabase delete failed for feature:", e);
@@ -239,7 +244,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setPlans(prev => prev.map(p => p.id === updated.id ? updated : p));
     
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
       
       const priceClean = (p: string) => parseFloat(p.replace(/[$,₹,]/g, '')) || 0;
 
@@ -276,7 +282,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const deletePlan = async (id: string) => {
     setPlans(prev => prev.filter(p => p.id !== id));
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
       await supabase.from('plans').delete().eq('id', id);
     } catch (e) {
       console.error("Supabase delete failed for plan:", e);
@@ -321,7 +328,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const lastSync = new Date().toISOString();
     setTenantInfo(prev => ({ ...prev, lastSync, syncStatus: 'Healthy' }));
     try {
-      if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+      const env = getEnv();
+      if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
       await supabase.from('tenants').upsert({ entra_tenant_id: tenantInfo.tenantId, name: tenantInfo.name, domain: tenantInfo.domain, last_sync: lastSync, sync_status: 'Healthy' });
     } catch (e) {
       console.error("Supabase sync failed for tenant status:", e);
@@ -346,8 +354,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setPlans(INITIAL_PLANS);
     setAuthConfig(getInitialAuth());
 
-    // Seeding logic: Push initial constants to Supabase if configured
-    if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) return;
+    const env = getEnv();
+    if (!env.SUPABASE_URL || env.SUPABASE_URL.includes('placeholder')) return;
     
     console.info("Seeding Supabase with initial M365 constants...");
     try {
